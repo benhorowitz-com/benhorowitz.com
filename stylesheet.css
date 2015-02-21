@@ -6,8 +6,8 @@ body {
     max-width: 970px;
     margin-top: 1em;
     margin-bottom: 15em;
-    margin-left: 1em;
-    margin-right: 1.5em;
+    padding-left: 1em;
+    padding-right: 1.5em;
 }
 
 p, h1, h2, h4, li {
