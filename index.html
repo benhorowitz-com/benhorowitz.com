@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ben Horowitz</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,185 +19,167 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:700|Open+Sans' rel='stylesheet' type='text/css'>
+
+    <style>
+    p,
+    h1,
+    h2,
+    h4,
+    li {
+        font-family: 'Open Sans', sans-serif;
+    }
+    h3 {
+        font-family: 'Droid Serif', serif;
+    }
+    </style>
 </head>
 
 <body>
-    <h1>Ben Horowitz</h1>
+    <div class="container">
+        <h1>Ben Horowitz</h1>
 
-    <p>
-        914.523.8669 </br>
-        ben@benhorowitz.com </br>
-        www.linkedin.com/in/therealbenhorowitz
-    </p>
+        <p>
+            <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
+        </p>
 
-    <p>
-        Experienced software architect with a proven track record of delivering enterprise-scale web applications. Specializing in backend and API development, service-oriented architecture, and high scalability/high availability solutions. Strong communication skills, including a talent for distilling the technical complexity and cost of business requirements to effectively groom product backlogs for the highest business value.
-    </p>
+        <p>
+            Experienced software architect with a proven track record of delivering enterprise-scale web applications. Specializing in backend and API development, service-oriented architecture, and high scalability/high availability solutions. Strong communication skills, including a talent for distilling the technical complexity and cost of business requirements to effectively groom product backlogs for the highest business value.
+        </p>
 
-    <h2>Expertise</h2>
+        <h2>Expertise</h2>
 
-    <table>
-        <tr>
-            <th>
-                Manage
-            </th>
-            <th>
-                Build
-            </th>
-            <th>
-                Deliver
-            </th>
-        </tr>
-        <tr>
-            <td width="30%" valign="top">
-                <h3>Technical Architecture</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Manage</h3>
+
+                <h4>Technical Architecture</h4>
                 <p>Tech strategy, Software and systems architecture, User experience</p>
 
-                <h3>Technical Project Management</h3>
+                <h4>Technical Project Management</h4>
                 <p>Engineering management, Requirements gathering, Timeline estimation, Project scoping, Roadmap planning, Risk management</p>
 
-                <h3>Agile</h3>
+                <h4>Agile</h4>
                 <p>Scrum, KanBan</p>
 
-                <h3>Best Practices</h3>
+                <h4>Best Practices</h4>
                 <p>Git, TDD, BDD</p>
-            </td>
-            <td width="30%" valign="top">
-                <h3>
-                    Languages
-                </h3>
-                <p>
-                    PHP, Ruby, Node, Java, Python, Javascript, HTML, CSS
-                </p>
-                <h3>
-                    Frameworks
-                </h3>
-                <p>
-                    Rails, Symfony, JQuery
-                </p>
-                <h3>
-                    Data Stores
-                </h3>
-                <p>
-                    MySQL, PostgreSQL, MongoDB, Redis
-                </p>
-                <h3>
-                    Search
-                </h3>
-                <p>
-                    Solr, Elasticsearch
-                </p>
-                <h3>
-                    Server Configuration
-                </h3>
-                <p>
-                    Linux/CLI, Apache, NGINX, Tomcat, Jetty
-                </p>
-            </td>
-            <td width="30%" valign="top">
-                <h3>
-                    Continuous Delivery
-                </h3>
-                <p>
-                    Continuous integration, Chef, Vagrant, Jenkins, Docker
-                </p>
-                <h3>
-                    Caching/CDN
-                </h3>
-                <p>
-                    Varnish, Akamai
-                </p>
-                <h3>
-                    AWS
-                </h3>
-                <p>
-                    EC2, RDS, S3, CloudFront, Route 53, Elastic Beanstalk, OpsWorks
-                </p>
-                <h3>
-                    Scale
-                </h3>
-                <p>
-                    High scalability, high availability, Load testing, Capacity planning
-                </p>
-            </td>
-        </tr>
-    </table>
+            </div>
 
-    <h2>Experience</h2>
+            <div class="col-md-4">
+                <h3>Build</h3>
 
-    <h3>Huge, Inc.</h3>
-    <p>
-        January 2013 – Current </br>
-        Senior Software Engineer
-    </p>
-    <ul>
-        <li>Pioneered agile practices at Huge.</li>
-        <li>Team lead for multiple teams, including distributed teams.</li>
-        <li>Worked closely with stakeholders to design technical architecture that supported both immediate and long-term product goals.</li>
-        <li>Created custom service-oriented architecture with Symfony, combining the content of over 270 existing sites into one centralized web presence.</li>
-        <li>Created a Solr/Lucene powered faceted search experience for a major NYC health care provider and other clients.</li>
-    </ul>
+                <h4>Languages</h4>
+                <p>PHP, Ruby, Node, Java, Python, Javascript, HTML, CSS </p>
 
-    <h2>Happy Spider</h2>
-    <p>
-        Founded 2011 </br>
-        Co-Founder
-    </p>
-    <ul>
-        <li>Managed iOS development team.</li>
-        <li>Staffed lean projects for maximum efficiency of resources and budget.</li>
-        <li>Accurate budget and timeline estimations.</li>
-        <li>Built a RESTful API with Node JS, built to support iOS and additional frontends.</li>
-    </ul>
+                <h4>Frameworks</h4>
+                <p>Rails, Symfony, JQuery </p>
+
+                <h4>Data Stores</h4>
+                <p>MySQL, PostgreSQL, MongoDB, Redis </p>
+
+                <h4>Search</h4>
+                <p>Solr, Elasticsearch </p>
+
+                <h4>Server Configuration</h4>
+                <p>Linux/CLI, Apache, NGINX, Tomcat, Jetty </p>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Deliver</h3>
+
+                <h4>Continuous Delivery</h4>
+                <p>Continuous integration, Chef, Vagrant, Jenkins, Docker</p>
+
+                <h4>Caching/CDN</h4>
+                <p>Varnish, Akamai</p>
+
+                <h4>AWS</h4>
+                <p>EC2, RDS, S3, CloudFront, Route 53, Elastic Beanstalk, OpsWorks</p>
+
+                <h4>Scale</h4>
+                <p>High scalability, high availability, Load testing, Capacity planning</p>
+            </div>
+        </div>
 
 
-    <h2>StyleCaster, Inc.</h2>
-    <p>
-        September 2012 – January 2013 </br>
-        Senior Developer
-    </p>
-    <ul>
-        <li>Architected and implemented a complete re-build of StyleCaster.com, migrating the site from Symfony2 to Ruby on Rails, hosted on Heroku.</li>
-    </ul>
-    
+        <h2>Experience</h2>
 
-    <h2>ExpandTheRoom, LLC</h2>
-    <p>
-        August 2010 – August 2012 </br>
-        Developer
-    </p>
-    <ul>
-        <li>Technical lead for multiple clients, including RollingStone and Live Nation.</li>
-        <li>Managed a team of 10 backend and frontend developers.</li>
-        <li>Built multiple custom content management systems.</li>
-    </ul>
+        <h3>Huge, Inc.</h3>
+        <p>
+            January 2013 – Current </br>
+            Senior Software Engineer
+        </p>
+        <ul>
+            <li>Pioneered agile practices at Huge.</li>
+            <li>Team lead for multiple teams, including distributed teams.</li>
+            <li>Worked closely with stakeholders to design technical architecture that supported both immediate and long-term product goals.</li>
+            <li>Created custom service-oriented architecture with Symfony, combining the content of over 270 existing sites into one centralized web presence.</li>
+            <li>Created a Solr/Lucene powered faceted search experience for a major NYC health care provider and other clients.</li>
+        </ul>
 
-
-    <h2>One Foot Productions, LLC</h2>
-    <p>
-        April 2007 – March 2008 </br>
-        Developer
-    </p>
-    <ul>
-        <li>Developed a proprietary web based, data driven, and object oriented application used to manage live television show logistics. 90% of codebase is still in use.</li>
-    </ul>
+        <h3>Happy Spider</h3>
+        <p>
+            Founded 2011 </br>
+            Co-Founder
+        </p>
+        <ul>
+            <li>Managed iOS development team.</li>
+            <li>Staffed lean projects for maximum efficiency of resources and budget.</li>
+            <li>Accurate budget and timeline estimations.</li>
+            <li>Built a RESTful API with Node JS, built to support iOS and additional frontends.</li>
+        </ul>
 
 
-    <h2>Additional experience</h2>
-    <p>
-        <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
-    </p>
+        <h3>StyleCaster, Inc.</h3>
+        <p>
+            September 2012 – January 2013 </br>
+            Senior Developer
+        </p>
+        <ul>
+            <li>Architected and implemented a complete re-build of StyleCaster.com, migrating the site from Symfony2 to Ruby on Rails, hosted on Heroku.</li>
+        </ul>
 
 
-    <h2>Fun Fact</h2>
-    <p>
-        Given milk, a lemon, and a tea towel, I can make three types of cheese in one day!
-    </p>
+        <h3>ExpandTheRoom, LLC</h3>
+        <p>
+            August 2010 – August 2012 </br>
+            Developer
+        </p>
+        <ul>
+            <li>Technical lead for multiple clients, including RollingStone and Live Nation.</li>
+            <li>Managed a team of 10 backend and frontend developers.</li>
+            <li>Built multiple custom content management systems.</li>
+        </ul>
+
+
+        <h3>One Foot Productions, LLC</h3>
+        <p>
+            April 2007 – March 2008 </br>
+            Developer
+        </p>
+        <ul>
+            <li>Developed a proprietary web based, data driven, and object oriented application used to manage live television show logistics. 90% of codebase is still in use.</li>
+        </ul>
+
+
+        <h3>Additional experience</h3>
+        <p>
+            <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
+        </p>
+
+
+        <h3>Fun Fact</h3>
+        <p>
+            Given milk, a lemon, and a tea towel, I can make three types of cheese in one day!
+        </p>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
