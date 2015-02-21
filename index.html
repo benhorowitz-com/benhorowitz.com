@@ -22,36 +22,27 @@
 
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:700|Open+Sans' rel='stylesheet' type='text/css'>
 
-    <style>
-    p,
-    h1,
-    h2,
-    h4,
-    li {
-        font-family: 'Open Sans', sans-serif;
-    }
-    h3 {
-        font-family: 'Droid Serif', serif;
-    }
-    </style>
-</head>`
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans|PT+Sans|Muli:300,400|Oxygen:400,300' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
 
 <body>
     <div class="container">
         <h1>Ben Horowitz</h1>
 
         <p>
-            <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
+            <a href="mailto:make.me.an.offer@benhorowitz.com">make.me.an.offer@benhorowitz.com</a>
         </p>
 
-        <p>
+        <p class="summary">
             Experienced software architect with a proven track record of delivering enterprise-scale web applications. Specializing in backend and API development, service-oriented architecture, and high scalability/high availability solutions. Strong communication skills, including a talent for distilling the technical complexity and cost of business requirements to effectively groom product backlogs for the highest business value.
         </p>
 
         <h2>Expertise</h2>
 
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="row skills">
+            <div class="col-sm-4 skillset">
                 <h3>Manage</h3>
 
                 <h4>Technical Architecture</h4>
@@ -67,7 +58,7 @@
                 <p>Git, TDD, BDD</p>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4 skillset">
                 <h3>Build</h3>
 
                 <h4>Languages</h4>
@@ -86,7 +77,7 @@
                 <p>Linux/CLI, Apache, NGINX, Tomcat, Jetty </p>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4 skillset">
                 <h3>Deliver</h3>
 
                 <h4>Continuous Delivery</h4>
@@ -106,80 +97,88 @@
 
         <h2>Experience</h2>
 
-        <h3>Huge, Inc.</h3>
-        <p>
-            January 2013 – Current </br>
-            Senior Software Engineer
-        </p>
-        <ul>
-            <li>Pioneered agile practices at Huge.</li>
-            <li>Team lead for multiple teams, including distributed teams.</li>
-            <li>Worked closely with stakeholders to design technical architecture that supported both immediate and long-term product goals.</li>
-            <li>Created custom service-oriented architecture with Symfony, combining the content of over 270 existing sites into one centralized web presence.</li>
-            <li>Created a Solr/Lucene powered faceted search experience for a major NYC health care provider and other clients.</li>
-        </ul>
+        <div class="experience">
+            <div class="job">
+                <h3>Huge, Inc.</h3>
+                <p>
+                    January 2013 – Current </br>
+                    Senior Software Engineer
+                </p>
+                <ul>
+                    <li>Pioneered agile practices at Huge.</li>
+                    <li>Team lead for multiple teams, including distributed teams.</li>
+                    <li>Worked closely with stakeholders to design technical architecture that supported both immediate and long-term product goals.</li>
+                    <li>Created custom service-oriented architecture with Symfony, combining the content of over 270 existing sites into one centralized web presence.</li>
+                    <li>Created a Solr/Lucene powered faceted search experience for a major NYC health care provider and other clients.</li>
+                </ul>
+            </div>
 
-        <h3>Happy Spider</h3>
-        <p>
-            Founded 2011 </br>
-            Co-Founder
-        </p>
-        <ul>
-            <li>Managed iOS development team.</li>
-            <li>Staffed lean projects for maximum efficiency of resources and budget.</li>
-            <li>Accurate budget and timeline estimations.</li>
-            <li>Built a RESTful API with Node JS, built to support iOS and additional frontends.</li>
-        </ul>
+            <div class="job">
+                <h3>Happy Spider</h3>
+                <p>
+                    Founded 2011 </br>
+                    Co-Founder
+                </p>
+                <ul>
+                    <li>Managed iOS development team.</li>
+                    <li>Staffed lean projects for maximum efficiency of resources and budget.</li>
+                    <li>Accurate budget and timeline estimations.</li>
+                    <li>Built a RESTful API with Node JS, built to support iOS and additional frontends.</li>
+                </ul>
+            </div>
 
+            <div class="job">
+                <h3>StyleCaster, Inc.</h3>
+                <p>
+                    September 2012 – January 2013 </br>
+                    Senior Developer
+                </p>
+                <ul>
+                    <li>Architected and implemented a complete re-build of StyleCaster.com, migrating the site from Symfony2 to Ruby on Rails, hosted on Heroku.</li>
+                </ul>
+            </div>
 
-        <h3>StyleCaster, Inc.</h3>
-        <p>
-            September 2012 – January 2013 </br>
-            Senior Developer
-        </p>
-        <ul>
-            <li>Architected and implemented a complete re-build of StyleCaster.com, migrating the site from Symfony2 to Ruby on Rails, hosted on Heroku.</li>
-        </ul>
+            <div class="job">
+                <h3>ExpandTheRoom, LLC</h3>
+                <p>
+                    August 2010 – August 2012 </br>
+                    Developer
+                </p>
+                <ul>
+                    <li>Technical lead for multiple clients, including RollingStone and Live Nation.</li>
+                    <li>Managed a team of 10 backend and frontend developers.</li>
+                    <li>Built multiple custom content management systems.</li>
+                </ul>
+            </div>
 
+            <div class="job">
+                <h3>One Foot Productions, LLC</h3>
+                <p>
+                    April 2007 – March 2008 </br>
+                    Developer
+                </p>
+                <ul>
+                    <li>Developed a proprietary web based, data driven, and object oriented application used to manage live television show logistics. 90% of codebase is still in use.</li>
+                </ul>
+            </div>
 
-        <h3>ExpandTheRoom, LLC</h3>
-        <p>
-            August 2010 – August 2012 </br>
-            Developer
-        </p>
-        <ul>
-            <li>Technical lead for multiple clients, including RollingStone and Live Nation.</li>
-            <li>Managed a team of 10 backend and frontend developers.</li>
-            <li>Built multiple custom content management systems.</li>
-        </ul>
+            <div class="job">
+                <h3>Additional experience</h3>
+                <p>
+                    <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
+                </p>
+            </div>
+        </div>
 
-
-        <h3>One Foot Productions, LLC</h3>
-        <p>
-            April 2007 – March 2008 </br>
-            Developer
-        </p>
-        <ul>
-            <li>Developed a proprietary web based, data driven, and object oriented application used to manage live television show logistics. 90% of codebase is still in use.</li>
-        </ul>
-
-
-        <h3>Additional experience</h3>
-        <p>
-            <a href="http://www.linkedin.com/in/therealbenhorowitz">www.linkedin.com/in/therealbenhorowitz</a>
-        </p>
-
-
-        <h3>Fun Fact</h3>
+        <h2>Fun Fact</h2>
         <p>
             Given milk, a lemon, and a tea towel, I can make three types of cheese in one day!
         </p>
-    </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

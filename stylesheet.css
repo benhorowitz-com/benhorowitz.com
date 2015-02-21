@@ -1,0 +1,68 @@
+body {
+    font-size: medium;
+}
+
+.container {
+    max-width: 970px;
+    margin-top: 4em;
+    margin-bottom: 15em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+p, h1, h2, h4, li {
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+}
+
+h3 {
+    font-family: 'Droid Serif', serif;
+}
+
+p, li {
+    font-size: 1em;
+}
+
+h1, h2 {
+    font-size: 1.8em;
+    margin-top: 1.57em;
+}
+
+h3 {
+    font-size: 1.04em;
+    margin-bottom: .25em;
+}
+
+h4 {
+    font-size: .87em;
+    letter-spacing: .03em;
+    margin-top: 2em;
+    margin-bottom: .25em;
+    color: grey;
+}
+
+.summary {
+    margin-bottom: 5em;
+}
+
+.skills, .experience {
+    margin-top: 1.65em;
+}
+
+.skills h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.skillset {
+    margin-bottom: 2em;
+}
+
+.experience{
+    margin-bottom: 1.65em;
+}
+
+.job {
+    margin-bottom: 3em;
+}
+
