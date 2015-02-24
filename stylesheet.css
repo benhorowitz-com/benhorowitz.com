@@ -65,3 +65,22 @@ h4 {
     margin-bottom: 3em;
 }
 
+@media print {
+    body {
+        font-size: small;
+    }
+
+    .container {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    .skillset {
+        width: 33%;
+        float: left;
+    }
+}
