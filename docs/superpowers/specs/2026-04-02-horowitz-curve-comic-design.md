@@ -72,6 +72,24 @@ Each mini-graph shows:
 ### Title
 *"Fig. 2: The Horowitz Curve has been observed across all fields."*
 
+## Panel 3: Frontier Model Performance Over Time (Fig. 3)
+
+A third graph showing the macro trend: as frontier models improve over time, the agent line rises while human performance stays flat. The Horowitz Threshold moves earlier in the day — the window of human superiority is shrinking.
+
+### Graph Structure
+- **X-axis:** "Time" (labeled with model generations or years, e.g., 2023, 2024, 2025, 2026)
+- **Y-axis:** "Peak Task Performance"
+- **Human line:** Flat. Humans aren't getting smarter.
+- **Agent line:** Rising curve, approaching and eventually crossing the human line.
+
+### Key Elements
+- The crossover point where agent peak performance exceeds human peak performance
+- Once agents surpass peak human, the Horowitz Curve from Fig. 1 no longer has *any* window of human superiority — the entire 24 hours belongs to the agent
+- Deadpan caption: something connecting it back to Fig. 1
+
+### Title
+*"Fig. 3: Frontier model performance vs. human performance over time."*
+
 ## Visual Design
 
 - **Font:** Inter (Google Fonts) — clean, highly legible
