@@ -48,7 +48,7 @@ Special annotations:
 - *"Humans achieve 47% of agent output on a 24-hour basis. They describe this as 'crushing it.'"*
 
 ### Alt-text
-Easter egg on hover (TBD — should be an additional joke not visible on screen).
+Easter egg on hover via the SVG `<title>` element: *"The model does not account for 'I'll just check Slack real quick.' Agent has no Slack."*
 
 ## Panel 2: The Domain Grid (Fig. 2)
 
@@ -105,12 +105,18 @@ index.html
 │   ├── Title area — "The Horowitz Curve"
 │   ├── Panel 1 — Main graph SVG (Fig. 1)
 │   ├── Panel 2 — Domain grid SVG (Fig. 2)
-│   └── Footer — attribution, link to benhorowitz.com context
+│   └── Footer — "by Ben Horowitz" with link to GitHub profile
 ```
 
 ## Social Sharing Considerations
 
 - OG meta tags with title, description, and image
-- The SVG should be rendered to a static PNG for og:image
+- A static PNG of the main graph will be manually created (headless Chrome screenshot) and committed as `og-image.png` in the repo root
 - Title: "The Horowitz Curve"
 - Description: "Humans achieve 47% of agent output on a 24-hour basis. They describe this as 'crushing it.'"
+
+## Cleanup Notes
+
+- Existing `stylesheet.css` can be removed (new page is self-contained)
+- Preserve existing Google Analytics tracking (UA-59998314-1) in the new index.html
+- `CNAME` and `.nojekyll` remain unchanged
