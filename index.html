@@ -244,7 +244,128 @@
     </svg>
         </div>
         <div class="panel" id="fig2">
-            <!-- Fig 2: Domain grid goes here -->
+            <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'Inter', -apple-system, sans-serif; }
+        </style>
+      </defs>
+
+      <rect x="0" y="0" width="960" height="540" fill="#fcfcfc"/>
+
+      <!-- Title -->
+      <text x="480" y="30" text-anchor="middle" font-size="14" fill="#888" font-style="italic">Fig. 2: The Horowitz Curve has been observed across all fields.</text>
+
+      <!-- Simplified human curve path (reused in each cell) -->
+      <!-- Cell dimensions: 440x150, graph area inside: 380x90 -->
+      <!-- Cell positions: col1 x=20, col2 x=500; row1 y=50, row2 y=210, row3 y=370 -->
+
+      <!-- Cell 1: Code Review -->
+      <g transform="translate(20,50)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Code Review</text>
+        <!-- Axes -->
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <!-- Agent line -->
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <!-- Human line -->
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <!-- Crossover dot -->
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+
+      <!-- Cell 2: Driving -->
+      <g transform="translate(500,50)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Driving</text>
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+
+      <!-- Cell 3: Surgery -->
+      <g transform="translate(20,210)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Surgery</text>
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+
+      <!-- Cell 4: Air Traffic Control -->
+      <g transform="translate(500,210)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Air Traffic Control</text>
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+
+      <!-- Cell 5: Nuclear Launch Oversight -->
+      <g transform="translate(20,370)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Nuclear Launch Oversight</text>
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+
+      <!-- Cell 6: Parenting -->
+      <g transform="translate(500,370)">
+        <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Parenting</text>
+        <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="130" x2="40" y2="35" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="82" x2="420" y2="82" stroke="#4682d4" stroke-width="2"/>
+        <line x1="40" y1="128" x2="65" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M65,128 C75,110 85,70 100,48 C110,42 115,44 120,50 C130,62 145,85 160,110 L165,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="165" y1="128" x2="185" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M185,128 C195,105 205,80 215,72 C220,74 225,78 230,82 C235,78 240,65 245,58 C248,62 252,72 255,82 C265,95 280,110 300,122 L310,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="310" y1="128" x2="330" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <path d="M330,128 C335,125 338,126 342,128" stroke="#d4842a" stroke-width="2" fill="none"/>
+        <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
+        <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
+      </g>
+    </svg>
         </div>
         <div class="panel" id="fig3">
             <!-- Fig 3: Frontier model timeline goes here -->
