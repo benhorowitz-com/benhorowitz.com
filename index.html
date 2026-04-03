@@ -758,15 +758,15 @@
       <!-- Human line (flat) -->
       <line x1="120" y1="160" x2="900" y2="160" stroke="#d4842a" stroke-width="3"/>
 
-      <!-- Agent line (rising curve) -->
-      <path d="M120,285 C180,282 260,275 340,265 C400,256 440,245 480,230 C520,215 550,195 580,160 C610,125 650,90 700,60 C740,38 790,18 850,-5 C870,-12 890,-18 900,-22" stroke="#4682d4" stroke-width="3" fill="none"/>
+      <!-- Agent line (true exponential — nearly flat at start, rockets up at end) -->
+      <path d="M120,288 C200,287 300,286 400,284 C460,282 510,279 550,274 C580,269 610,262 640,250 C660,242 680,230 700,210 C720,185 740,150 760,100 C775,60 790,10 810,-50 C830,-110 860,-190 900,-300" stroke="#4682d4" stroke-width="3" fill="none"/>
 
-      <!-- Crossover point -->
-      <circle cx="580" cy="160" r="5" fill="#d44" stroke="white" stroke-width="2"/>
+      <!-- Crossover point (where agent crosses human at y=160) -->
+      <circle cx="735" cy="160" r="5" fill="#d44" stroke="white" stroke-width="2"/>
 
       <!-- Crossover label -->
-      <rect x="440" y="130" width="185" height="20" rx="3" fill="white" stroke="none"/>
-      <text x="532" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="#d44">Agents exceed peak human</text>
+      <rect x="570" y="130" width="200" height="22" rx="3" fill="white" stroke="none"/>
+      <text x="670" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#d44">Agents exceed peak human</text>
 
       <!-- Line labels -->
       <rect x="905" y="152" width="55" height="16" fill="white" stroke="none"/>
