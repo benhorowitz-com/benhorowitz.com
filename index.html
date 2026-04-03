@@ -16,33 +16,80 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #fcfcfc;
+            background: #f5f5f0;
             color: #2a2a2a;
-            padding: 40px 20px;
+            padding: 0;
         }
         .container {
-            max-width: 960px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .narrative {
+            text-align: center;
+            padding: 48px 20px 24px;
+            max-width: 600px;
             margin: 0 auto;
         }
-        .panel {
-            margin-bottom: 60px;
+        .narrative h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
         }
-        .panel svg {
+        .narrative p {
+            font-size: 15px;
+            color: #777;
+            line-height: 1.6;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            padding: 24px 16px 16px;
+            margin-bottom: 20px;
+        }
+        .card svg {
             width: 100%;
             height: auto;
+            display: block;
         }
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0 40px;
             color: #aaa;
             font-size: 13px;
         }
-        footer a { color: #888; }
+        footer a { color: #888; text-decoration: none; }
+        footer a:hover { color: #555; }
     </style>
 </head>
 <body>
+    <div class="hero">
+        <h1>The Horowitz Curve</h1>
+        <p>We first noticed it doing code reviews. Then we started seeing it everywhere.</p>
+    </div>
+
     <div class="container">
-        <div class="panel" id="fig1">
+        <div class="card" id="fig1">
             <svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg">
       <title>The model does not account for "I'll just check Slack real quick." Agent has no Slack.</title>
       <defs>
@@ -51,7 +98,7 @@
         </style>
       </defs>
 
-      <rect x="0" y="0" width="960" height="640" fill="#fcfcfc"/>
+      <rect x="0" y="0" width="960" height="640" fill="white"/>
 
       <!-- Grid -->
       <g stroke="#f0f0f0" stroke-width="1">
@@ -86,8 +133,7 @@
         <line x1="120" y1="370" x2="900" y2="370"/>
       </g>
 
-      <!-- Title -->
-      <text x="510" y="50" text-anchor="middle" font-size="26" font-weight="700" fill="#2a2a2a">The Horowitz Curve</text>
+      <!-- Title removed — now in hero section above -->
 
       <!-- Axes -->
       <line x1="120" y1="430" x2="900" y2="430" stroke="#555" stroke-width="2"/>
@@ -229,39 +275,302 @@
       <!-- Horowitz Threshold -->
       <circle cx="460" cy="310" r="5" fill="#d44" stroke="white" stroke-width="2"/>
       <line x1="465" y1="308" x2="555" y2="280" stroke="#d44" stroke-width="1" stroke-dasharray="3,2"/>
-      <rect x="550" y="268" width="200" height="22" rx="3" fill="#fcfcfc" stroke="none"/>
+      <rect x="550" y="268" width="200" height="22" rx="3" fill="white" stroke="none"/>
       <text x="650" y="284" text-anchor="middle" font-size="14" font-weight="700" fill="#d44">The Horowitz Threshold</text>
 
       <!-- Line labels -->
-      <rect x="905" y="302" width="50" height="16" fill="#fcfcfc" stroke="none"/>
+      <rect x="905" y="302" width="50" height="16" fill="white" stroke="none"/>
       <text x="910" y="314" font-size="13" font-weight="700" fill="#4682d4">Agent</text>
-      <rect x="905" y="420" width="55" height="16" fill="#fcfcfc" stroke="none"/>
+      <rect x="905" y="420" width="55" height="16" fill="white" stroke="none"/>
       <text x="910" y="432" font-size="13" font-weight="700" fill="#d4842a">Human</text>
 
       <!-- Captions -->
-      <text x="510" y="510" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Fig. 1: Task quality in humans vs. agents over 24 hours (n=everyone, p&lt;you'd think so)</text>
+      <text x="510" y="510" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Fig. 1a: Task quality in humans vs. agents over 24 hours (n=everyone, p&lt;you'd think so)</text>
       <text x="510" y="530" text-anchor="middle" font-size="10" fill="#aaa" font-style="italic">Humans achieve 47% of agent output on a 24-hour basis. They describe this as "crushing it."</text>
     </svg>
         </div>
-        <div class="panel" id="fig2">
-            <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
+
+        <div class="narrative">
+            <h2>Now zoom out to a week.</h2>
+            <p>Agents don't sleep. They don't take weekends. They don't need lunch.</p>
+        </div>
+
+        <div class="card" id="fig1b">
+            <svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <style>
           text { font-family: 'Inter', -apple-system, sans-serif; }
         </style>
       </defs>
 
-      <rect x="0" y="0" width="960" height="540" fill="#fcfcfc"/>
+      <rect x="0" y="0" width="960" height="480" fill="white"/>
+
+      <!-- Grid: vertical lines per day, horizontal lines for reference -->
+      <g stroke="#f0f0f0" stroke-width="1">
+        <line x1="120" y1="60" x2="120" y2="340"/>
+        <line x1="231" y1="60" x2="231" y2="340"/>
+        <line x1="343" y1="60" x2="343" y2="340"/>
+        <line x1="454" y1="60" x2="454" y2="340"/>
+        <line x1="566" y1="60" x2="566" y2="340"/>
+        <line x1="677" y1="60" x2="677" y2="340"/>
+        <line x1="789" y1="60" x2="789" y2="340"/>
+        <line x1="900" y1="60" x2="900" y2="340"/>
+        <line x1="120" y1="130" x2="900" y2="130"/>
+        <line x1="120" y1="200" x2="900" y2="200"/>
+        <line x1="120" y1="270" x2="900" y2="270"/>
+      </g>
+
+      <!-- Weekend shading -->
+      <rect x="789" y="60" width="111" height="280" fill="rgba(0,0,0,0.02)" stroke="none"/>
+      <text x="845" y="78" text-anchor="middle" font-size="9" fill="#bbb">weekend</text>
+
+      <!-- Axes -->
+      <line x1="120" y1="340" x2="900" y2="340" stroke="#555" stroke-width="2"/>
+      <line x1="120" y1="340" x2="120" y2="55" stroke="#555" stroke-width="2"/>
+      <polygon points="120,55 116,65 124,65" fill="#555"/>
+      <polygon points="900,340 890,336 890,344" fill="#555"/>
+
+      <!-- Y-axis label -->
+      <text x="48" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#555" transform="rotate(-90,48,200)">Cumulative Output</text>
+
+      <!-- X-axis label -->
+      <text x="510" y="375" text-anchor="middle" font-size="13" font-weight="600" fill="#555">Day of Week</text>
+
+      <!-- X-axis ticks: 7 days, each day = 111.4px. Day centers between grid lines.
+           Day 1 center = 175.5, Day 2 = 287, Day 3 = 398.5, Day 4 = 510,
+           Day 5 = 621.5, Day 6 = 733, Day 7 = 844.5 -->
+      <g font-size="11" fill="#777">
+        <text x="175" y="358" text-anchor="middle">Mon</text>
+        <text x="287" y="358" text-anchor="middle">Tue</text>
+        <text x="398" y="358" text-anchor="middle">Wed</text>
+        <text x="510" y="358" text-anchor="middle">Thu</text>
+        <text x="621" y="358" text-anchor="middle">Fri</text>
+        <text x="733" y="358" text-anchor="middle">Sat</text>
+        <text x="845" y="358" text-anchor="middle">Sun</text>
+      </g>
+
+      <!-- Agent cumulative: straight line, constant 24/7 output -->
+      <line x1="120" y1="340" x2="900" y2="65" stroke="#4682d4" stroke-width="3"/>
+
+      <!-- Human cumulative: staircase.
+           Agent total = 275 units (y: 340→65). Human achieves ~34% = 93 units (y: 340→247).
+           5 weekdays × 0.47 agent-days = 2.35 agent-days. Weekends ≈ 0.
+           Ratio = 2.35/7 = 33.6%. Gap = 66%.
+           Per weekday step = 93/5 = ~18.6 units. Weekends flat.
+           Mon: 340→321, Tue: 321→303, Wed: 303→284, Thu: 284→266, Fri: 266→247.
+           Sat-Sun: flat at 247.
+           Each day: rise during work hours (first ~40% of day span), flat rest.
+      -->
+      <path d="M120,340
+        C125,340 130,339 135,337
+        C142,333 150,328 158,324
+        C164,322 168,321 172,321
+        C178,321 195,321 210,321
+        C220,321 231,321 231,321
+        C236,320 242,318 248,315
+        C255,311 263,306 270,303
+        C276,303 280,303 290,303
+        C300,303 315,303 330,303
+        C340,303 343,303 343,303
+        C348,302 354,300 360,297
+        C367,293 375,288 382,285
+        C388,284 392,284 400,284
+        C410,284 425,284 440,284
+        C450,284 454,284 454,284
+        C459,283 465,281 471,278
+        C478,274 486,270 493,267
+        C499,266 503,266 510,266
+        C520,266 535,266 550,266
+        C560,266 566,266 566,266
+        C571,265 577,263 583,260
+        C590,256 598,252 605,249
+        C611,248 615,247 625,247
+        C640,247 655,247 670,247
+        C677,247 677,247 690,247
+        C710,247 730,247 750,247
+        C770,247 789,247 789,247
+        C800,247 830,247 860,247
+        C880,247 900,247 900,247" stroke="#d4842a" stroke-width="3" fill="none"/>
+
+      <!-- Gap annotation -->
+      <line x1="910" y1="247" x2="910" y2="65" stroke="#d44" stroke-width="1.5"/>
+      <line x1="906" y1="247" x2="914" y2="247" stroke="#d44" stroke-width="1.5"/>
+      <line x1="906" y1="65" x2="914" y2="65" stroke="#d44" stroke-width="1.5"/>
+      <text x="930" y="160" text-anchor="start" font-size="11" font-weight="600" fill="#d44" transform="rotate(90,930,160)">~66% gap</text>
+
+      <!-- Line labels -->
+      <text x="895" y="58" text-anchor="end" font-size="13" font-weight="700" fill="#4682d4">Agent</text>
+      <text x="895" y="242" text-anchor="end" font-size="13" font-weight="700" fill="#d4842a">Human</text>
+
+      <!-- Captions -->
+      <text x="510" y="420" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Fig. 1b: Cumulative output over one week. The agent line is straight because it never stops.</text>
+      <text x="510" y="440" text-anchor="middle" font-size="10" fill="#aaa" font-style="italic">Humans achieve ~34% of agent output on a weekly basis. Weekends are not the flex you think they are.</text>
+    </svg>
+        </div>
+
+        <div class="narrative">
+            <h2>Now zoom out to a year.</h2>
+            <p>Agents don't take vacations. They don't get sick. They don't have slow Mondays.</p>
+        </div>
+
+        <div class="card" id="fig1c">
+            <svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'Inter', -apple-system, sans-serif; }
+        </style>
+      </defs>
+
+      <rect x="0" y="0" width="960" height="480" fill="white"/>
+
+      <!-- Grid -->
+      <g stroke="#f0f0f0" stroke-width="1">
+        <line x1="120" y1="60" x2="120" y2="340"/>
+        <line x1="185" y1="60" x2="185" y2="340"/>
+        <line x1="250" y1="60" x2="250" y2="340"/>
+        <line x1="315" y1="60" x2="315" y2="340"/>
+        <line x1="380" y1="60" x2="380" y2="340"/>
+        <line x1="445" y1="60" x2="445" y2="340"/>
+        <line x1="510" y1="60" x2="510" y2="340"/>
+        <line x1="575" y1="60" x2="575" y2="340"/>
+        <line x1="640" y1="60" x2="640" y2="340"/>
+        <line x1="705" y1="60" x2="705" y2="340"/>
+        <line x1="770" y1="60" x2="770" y2="340"/>
+        <line x1="835" y1="60" x2="835" y2="340"/>
+        <line x1="900" y1="60" x2="900" y2="340"/>
+        <line x1="120" y1="130" x2="900" y2="130"/>
+        <line x1="120" y1="200" x2="900" y2="200"/>
+        <line x1="120" y1="270" x2="900" y2="270"/>
+      </g>
+
+      <!-- Axes -->
+      <line x1="120" y1="340" x2="900" y2="340" stroke="#555" stroke-width="2"/>
+      <line x1="120" y1="340" x2="120" y2="55" stroke="#555" stroke-width="2"/>
+      <polygon points="120,55 116,65 124,65" fill="#555"/>
+      <polygon points="900,340 890,336 890,344" fill="#555"/>
+
+      <!-- Y-axis label -->
+      <text x="48" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#555" transform="rotate(-90,48,200)">Cumulative Output</text>
+
+      <!-- X-axis label -->
+      <text x="510" y="375" text-anchor="middle" font-size="13" font-weight="600" fill="#555">Month</text>
+
+      <!-- X-axis ticks: 12 months across 780px = 65px/month -->
+      <g font-size="10" fill="#777">
+        <text x="152" y="358" text-anchor="middle">Jan</text>
+        <text x="217" y="358" text-anchor="middle">Feb</text>
+        <text x="282" y="358" text-anchor="middle">Mar</text>
+        <text x="347" y="358" text-anchor="middle">Apr</text>
+        <text x="412" y="358" text-anchor="middle">May</text>
+        <text x="477" y="358" text-anchor="middle">Jun</text>
+        <text x="542" y="358" text-anchor="middle">Jul</text>
+        <text x="607" y="358" text-anchor="middle">Aug</text>
+        <text x="672" y="358" text-anchor="middle">Sep</text>
+        <text x="737" y="358" text-anchor="middle">Oct</text>
+        <text x="802" y="358" text-anchor="middle">Nov</text>
+        <text x="867" y="358" text-anchor="middle">Dec</text>
+      </g>
+
+      <!-- Agent cumulative: straight line, 365 days of constant output -->
+      <line x1="120" y1="340" x2="900" y2="65" stroke="#4682d4" stroke-width="3"/>
+
+      <!-- Human cumulative over 1 year.
+           Agent: 52 weeks constant output. Total height = 275 units (y: 340→65).
+           Human: 48 effective work weeks (52 - 2wk vacation - 1wk holidays - 1wk sick).
+           Each work week = 34% of agent week output.
+           Human total = 48 × (275/52) × 0.34 = 48 × 5.29 × 0.34 = 86.3 units.
+           Human ratio = 86.3/275 = 31.4%. Gap = 68.6% ≈ 69%.
+           Human final y = 340 - 86 = 254.
+
+           Monthly output per work month ≈ 86/12 = 7.2 units, but not evenly distributed:
+           - Jan-Jun: steady climb (~7 units/month)
+           - Jul: slower (vacation in here, ~2wk off)
+           - Aug: resumes
+           - Sep-Nov: steady climb
+           - Dec: slow (holidays + sick, ~1-2wk off)
+
+           Month x-positions: Jan center=152, each month=65px wide
+      -->
+      <!-- The curve rises steadily, flattens during Jul vacation (x≈510-575),
+           resumes Aug-Nov, then flattens again in Dec holidays (x≈835-900).
+           Start y=340, end y=254. Total rise = 86 units.
+
+           48 effective work weeks produce output. 4 weeks produce nothing.
+           Monthly rate during work months ≈ 86/10 = 8.6 units/month (10 productive months).
+           Jan(340→331), Feb(331→323), Mar(323→314), Apr(314→305), May(305→297), Jun(297→288)
+           Jul: vacation, nearly flat (288→286)
+           Aug(286→277), Sep(277→269), Oct(269→260), Nov(260→262→wait)
+
+           Let me simplify: 8 units/productive-month, Jul and Dec ≈ flat.
+           Jan:340→332, Feb:332→324, Mar:324→316, Apr:316→308, May:308→300, Jun:300→292
+           Jul: flat 292→290 (vacation)
+           Aug:290→282, Sep:282→274, Oct:274→266, Nov:266→258
+           Dec: flat 258→254 (holidays)
+      -->
+      <!-- Jan:340→332, Feb:332→324, Mar:324→316, Apr:316→308, May:308→300, Jun:300→292
+           Jul: nearly flat 292→290 (vacation)
+           Aug:290→282, Sep:282→274, Oct:274→266, Nov:266→258
+           Dec: nearly flat 258→256 (holidays)
+           Final: 256. Actual ratio = (340-256)/275 = 84/275 = 30.5%. Gap ≈ 69%. Close enough.
+      -->
+      <path d="M120,340
+        C135,337 152,334 168,332
+        C183,329 200,327 217,324
+        C232,321 250,319 265,316
+        C282,314 300,311 315,308
+        C330,306 347,303 362,300
+        C380,298 395,295 410,293
+        C425,291 440,290 455,289
+        C470,289 485,289 500,288
+        C510,288 520,288 530,288
+        L575,288
+        L607,288
+        C618,287 630,285 645,283
+        C660,281 675,279 690,277
+        C705,275 720,273 737,271
+        C750,269 765,268 780,266
+        C795,264 810,263 820,262
+        C830,261 835,260 840,259
+        C845,258 850,258 860,257
+        C870,257 880,256 900,256" stroke="#d4842a" stroke-width="3" fill="none"/>
+
+      <!-- Gap annotation -->
+      <line x1="910" y1="256" x2="910" y2="65" stroke="#d44" stroke-width="1.5"/>
+      <line x1="906" y1="256" x2="914" y2="256" stroke="#d44" stroke-width="1.5"/>
+      <line x1="906" y1="65" x2="914" y2="65" stroke="#d44" stroke-width="1.5"/>
+      <text x="930" y="164" text-anchor="start" font-size="11" font-weight="600" fill="#d44" transform="rotate(90,930,164)">~69% gap</text>
+
+      <!-- Line labels -->
+      <text x="895" y="58" text-anchor="end" font-size="13" font-weight="700" fill="#4682d4">Agent</text>
+      <text x="895" y="250" text-anchor="end" font-size="13" font-weight="700" fill="#d4842a">Human</text>
+
+      <!-- Captions -->
+      <text x="510" y="420" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Fig. 1c: Cumulative output over one year. Vacations, holidays, and sick days are not in the agent's vocabulary.</text>
+      <text x="510" y="440" text-anchor="middle" font-size="10" fill="#aaa" font-style="italic">Humans achieve ~31% of agent output on a yearly basis. The agent doesn't even know it's a holiday.</text>
+    </svg>
+        </div>
+
+        <div class="narrative">
+            <h2>And it applies to everything.</h2>
+            <p>Code review was just the beginning. The Horowitz Curve shows up wherever humans perform tasks that agents can also do.</p>
+        </div>
+
+        <div class="card" id="fig2">
+            <svg viewBox="0 0 960 530" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'Inter', -apple-system, sans-serif; }
+        </style>
+      </defs>
+
+      <rect x="0" y="0" width="960" height="530" fill="white"/>
 
       <!-- Title -->
-      <text x="480" y="30" text-anchor="middle" font-size="14" fill="#888" font-style="italic">Fig. 2: The Horowitz Curve has been observed across all fields.</text>
-
-      <!-- Simplified human curve path (reused in each cell) -->
       <!-- Cell dimensions: 440x150, graph area inside: 380x90 -->
-      <!-- Cell positions: col1 x=20, col2 x=500; row1 y=50, row2 y=210, row3 y=370 -->
+      <!-- Cell positions: col1 x=20, col2 x=500; row1 y=20, row2 y=180, row3 y=340 -->
 
       <!-- Cell 1: Code Review -->
-      <g transform="translate(20,50)">
+      <g transform="translate(20,20)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Code Review</text>
         <!-- Axes -->
@@ -282,7 +591,7 @@
       </g>
 
       <!-- Cell 2: Driving -->
-      <g transform="translate(500,50)">
+      <g transform="translate(500,20)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Driving</text>
         <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
@@ -299,7 +608,7 @@
       </g>
 
       <!-- Cell 3: Surgery -->
-      <g transform="translate(20,210)">
+      <g transform="translate(20,180)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Surgery</text>
         <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
@@ -316,7 +625,7 @@
       </g>
 
       <!-- Cell 4: Air Traffic Control -->
-      <g transform="translate(500,210)">
+      <g transform="translate(500,180)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Air Traffic Control</text>
         <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
@@ -333,7 +642,7 @@
       </g>
 
       <!-- Cell 5: Nuclear Launch Oversight -->
-      <g transform="translate(20,370)">
+      <g transform="translate(20,340)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Nuclear Launch Oversight</text>
         <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
@@ -350,7 +659,7 @@
       </g>
 
       <!-- Cell 6: Parenting -->
-      <g transform="translate(500,370)">
+      <g transform="translate(500,340)">
         <rect x="0" y="0" width="440" height="150" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
         <text x="220" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2a2a">Parenting</text>
         <line x1="40" y1="130" x2="420" y2="130" stroke="#ccc" stroke-width="1"/>
@@ -365,9 +674,18 @@
         <line x1="342" y1="128" x2="420" y2="128" stroke="#d4842a" stroke-width="2"/>
         <circle cx="255" cy="82" r="3" fill="#d44" stroke="white" stroke-width="1"/>
       </g>
+
+      <!-- Caption at bottom -->
+      <text x="480" y="515" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Fig. 2: The Horowitz Curve has been observed across all fields.</text>
     </svg>
         </div>
-        <div class="panel" id="fig3">
+
+        <div class="narrative">
+            <h2>It gets worse.</h2>
+            <p>Humans aren't getting smarter. Agents are getting better every year. The window of human superiority isn't just narrow — it's shrinking.</p>
+        </div>
+
+        <div class="card" id="fig3">
             <svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <style>
@@ -375,7 +693,7 @@
         </style>
       </defs>
 
-      <rect x="0" y="0" width="960" height="420" fill="#fcfcfc"/>
+      <rect x="0" y="0" width="960" height="420" fill="white"/>
 
       <!-- Grid -->
       <g stroke="#f0f0f0" stroke-width="1">
@@ -431,13 +749,13 @@
       <circle cx="580" cy="160" r="5" fill="#d44" stroke="white" stroke-width="2"/>
 
       <!-- Crossover label -->
-      <rect x="440" y="130" width="185" height="20" rx="3" fill="#fcfcfc" stroke="none"/>
+      <rect x="440" y="130" width="185" height="20" rx="3" fill="white" stroke="none"/>
       <text x="532" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="#d44">Agents exceed peak human</text>
 
       <!-- Line labels -->
-      <rect x="905" y="152" width="55" height="16" fill="#fcfcfc" stroke="none"/>
+      <rect x="905" y="152" width="55" height="16" fill="white" stroke="none"/>
       <text x="910" y="164" font-size="13" font-weight="700" fill="#d4842a">Human</text>
-      <rect x="905" y="60" width="50" height="16" fill="#fcfcfc" stroke="none"/>
+      <rect x="905" y="60" width="50" height="16" fill="white" stroke="none"/>
       <text x="910" y="72" font-size="13" font-weight="700" fill="#4682d4">Agent</text>
 
       <!-- Captions -->
@@ -448,7 +766,7 @@
         </div>
     </div>
     <footer>
-        by <a href="https://github.com/benhorowitz-com">Ben Horowitz</a>
+        by <a href="https://www.hyperspell.com">Hyperspell</a> — the memory &amp; context layer for AI agents
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
