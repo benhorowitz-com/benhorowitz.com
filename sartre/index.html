@@ -45,16 +45,14 @@
     }
     main {
       flex: 1;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 24px 32px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 24px 120px;
+      text-align: center; color: #888; line-height: 1.6;
     }
-    .widget-wrap {
-      width: 100%; max-width: 640px;
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-    }
-    .hint {
-      color: #888; font-size: 14px; text-align: center; line-height: 1.5;
-    }
+    main p { max-width: 420px; font-size: 15px; }
+    main .arrow { margin-top: 20px; color: #555; font-size: 48px; }
+    /* The widget element renders as a fixed-position floating button.
+       Keeping its defaults. */
   </style>
 </head>
 <body>
@@ -71,37 +69,34 @@
       </select>
     </div>
   </header>
+
   <main>
-    <div class="widget-wrap">
-      <div id="widget-container"></div>
-      <p class="hint">Tap the button to start talking. Tap again to end.</p>
-    </div>
+    <p>Pick who you are above, then tap the circle in the bottom-right to start talking with Sartre.</p>
+    <p>Tap again when you're done.</p>
+    <div class="arrow">↘︎</div>
   </main>
+
+  <!-- ConvAI widget: floats bottom-right by default (placement per agent's widget_config). -->
+  <elevenlabs-convai id="sartre-widget" agent-id="agent_8401kpkzcc64efrrahvrq0qtk7w8"></elevenlabs-convai>
 
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
   <script>
-    const AGENT_ID = "agent_8401kpkzcc64efrrahvrq0qtk7w8";
     const who = document.getElementById("who");
-    const container = document.getElementById("widget-container");
+    const widget = document.getElementById("sartre-widget");
 
+    // Restore saved choice
     const saved = localStorage.getItem("sartre.user");
     if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
 
-    function mountWidget(userId) {
-      container.innerHTML = "";
-      const el = document.createElement("elevenlabs-convai");
-      el.setAttribute("agent-id", AGENT_ID);
-      el.setAttribute("dynamic-variables", JSON.stringify({ user_id: userId }));
-      el.setAttribute("variant", "full");
-      container.appendChild(el);
+    function applyUser(userId) {
+      widget.setAttribute("dynamic-variables", JSON.stringify({ user_id: userId }));
     }
-
-    mountWidget(who.value);
+    applyUser(who.value);
 
     who.addEventListener("change", () => {
       localStorage.setItem("sartre.user", who.value);
-      mountWidget(who.value);
+      applyUser(who.value);
     });
   </script>
 </body>
