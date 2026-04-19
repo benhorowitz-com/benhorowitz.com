@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Sartre" />
+  <meta name="theme-color" content="#111111" />
+  <title>Sartre</title>
+  <style>
+    :root { color-scheme: dark; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #0b0b10; color: #f2f2f2;
+      overscroll-behavior: none;
+    }
+    body {
+      display: flex; flex-direction: column;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      min-height: 100%;
+    }
+    header {
+      padding: 20px 24px 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      align-items: center;
+    }
+    h1 {
+      margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;
+    }
+    .who {
+      display: flex; align-items: center; gap: 10px;
+      background: #1a1a22; border-radius: 12px;
+      padding: 10px 14px;
+    }
+    .who label { font-size: 14px; color: #a0a0b0; }
+    .who select {
+      background: transparent; color: #f2f2f2; border: 0; font-size: 18px; font-weight: 500;
+      -webkit-appearance: none; appearance: none; padding-right: 20px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0' fill='%23a0a0b0'/></svg>");
+      background-repeat: no-repeat; background-position: right 2px center;
+    }
+    main {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 24px 32px;
+    }
+    .widget-wrap {
+      width: 100%; max-width: 640px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .hint {
+      color: #888; font-size: 14px; text-align: center; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sartre</h1>
+    <div class="who">
+      <label for="who">I'm</label>
+      <select id="who" autocomplete="off">
+        <option value="sofia">Sofia</option>
+        <option value="alex">Alex</option>
+        <option value="sarah">Sarah</option>
+        <option value="ben" selected>Ben</option>
+        <option value="yulia">Yulia</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <div class="widget-wrap">
+      <div id="widget-container"></div>
+      <p class="hint">Tap the button to start talking. Tap again to end.</p>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+  <script>
+    const AGENT_ID = "agent_8401kpkzcc64efrrahvrq0qtk7w8";
+    const who = document.getElementById("who");
+    const container = document.getElementById("widget-container");
+
+    const saved = localStorage.getItem("sartre.user");
+    if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
+
+    function mountWidget(userId) {
+      container.innerHTML = "";
+      const el = document.createElement("elevenlabs-convai");
+      el.setAttribute("agent-id", AGENT_ID);
+      el.setAttribute("dynamic-variables", JSON.stringify({ user_id: userId }));
+      el.setAttribute("variant", "full");
+      container.appendChild(el);
+    }
+
+    mountWidget(who.value);
+
+    who.addEventListener("change", () => {
+      localStorage.setItem("sartre.user", who.value);
+      mountWidget(who.value);
+    });
+  </script>
+</body>
+</html>
