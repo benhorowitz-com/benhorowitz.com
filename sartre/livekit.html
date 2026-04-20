@@ -144,9 +144,21 @@
     <div id="status" class="status">Ready.</div>
   </main>
 
+  <script>
+    // Surface any script/module load error so iOS users see *something* instead
+    // of a blank "Load failed". Without this the iPad just shows nothing.
+    window.addEventListener("error", (e) => {
+      const s = document.getElementById("status");
+      if (s) s.textContent = "Script error: " + (e.message || e.filename || "unknown");
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      const s = document.getElementById("status");
+      if (s) s.textContent = "Error: " + (e.reason?.message || String(e.reason)).slice(0, 120);
+    });
+  </script>
   <script type="module">
     import { Room, RoomEvent, createLocalAudioTrack, ConnectionState }
-      from "https://cdn.skypack.dev/livekit-client@2.13.0";
+      from "https://esm.sh/livekit-client@2.13.0";
 
     const TOKEN_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/livekit-token";
 
