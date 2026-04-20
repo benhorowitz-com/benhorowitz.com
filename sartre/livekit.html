@@ -46,6 +46,10 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 0 28px 40px; text-align: center; gap: 20px;
     }
+    .talk-wrap {
+      position: relative; width: 260px; height: 260px;
+      display: flex; align-items: center; justify-content: center;
+    }
     button.talk {
       width: 220px; height: 220px; border-radius: 50%;
       background: #1f6feb; color: white; border: 0;
@@ -53,10 +57,45 @@
       box-shadow: 0 10px 40px rgba(31, 111, 235, 0.4);
       transition: transform .1s ease, background .2s ease;
       -webkit-tap-highlight-color: transparent;
+      position: relative; z-index: 1;
     }
     button.talk:active { transform: scale(0.97); }
     button.talk.active { background: #d93a3a; box-shadow: 0 10px 40px rgba(217, 58, 58, 0.4); }
     button.talk:disabled { opacity: 0.5; }
+    /* Agent-state ring around the button. Hidden unless data-state is set. */
+    .ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .talk-wrap[data-state] .ring { opacity: 1; }
+    .talk-wrap[data-state="listening"] .ring {
+      border: 3px solid #3ac86a;
+      animation: breathe 1.6s ease-in-out infinite;
+    }
+    .talk-wrap[data-state="thinking"] .ring {
+      border: 3px solid transparent;
+      border-top-color: #f5a623;
+      border-right-color: #f5a623;
+      animation: spin 0.9s linear infinite;
+    }
+    .talk-wrap[data-state="speaking"] .ring {
+      border: 3px solid #1f6feb;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(58,200,106,0); }
+      50%      { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(58,200,106,0.08); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(31,111,235,0); }
+      50%      { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(31,111,235,0.12); }
+    }
     button.mute {
       width: 72px; height: 72px; border-radius: 50%;
       background: #1a1a22; color: #f2f2f2; border: 0;
@@ -96,7 +135,10 @@
   </header>
 
   <main>
-    <button id="talk" class="talk">Talk to Sartre</button>
+    <div class="talk-wrap" id="talk-wrap">
+      <div class="ring"></div>
+      <button id="talk" class="talk">Talk to Sartre</button>
+    </div>
     <div class="level-meter"><div id="level"></div></div>
     <button id="mute" class="mute" aria-label="Mute microphone" disabled>🎤</button>
     <div id="status" class="status">Ready.</div>
@@ -109,10 +151,26 @@
     const TOKEN_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/livekit-token";
 
     const who = document.getElementById("who");
+    const talkWrap = document.getElementById("talk-wrap");
     const talk = document.getElementById("talk");
     const mute = document.getElementById("mute");
     const status = document.getElementById("status");
     const level = document.getElementById("level");
+
+    const STATE_LABEL = {
+      listening: "Listening…",
+      thinking: "Thinking…",
+      speaking: "Speaking",
+      initializing: "Waking up…",
+    };
+    function setAgentState(s) {
+      if (!s) {
+        talkWrap.removeAttribute("data-state");
+        return;
+      }
+      talkWrap.setAttribute("data-state", s);
+      if (STATE_LABEL[s]) status.textContent = STATE_LABEL[s];
+    }
 
     const saved = localStorage.getItem("sartre.user");
     if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
@@ -164,10 +222,25 @@
           // Tapping the button again will trigger room.startAudio()
         }
       });
+      // LiveKit Agents publishes its state as a participant attribute
+      // (`lk.agent.state` = initializing | listening | thinking | speaking).
+      // Drive the ring + status text off that.
+      const applyAgentAttrs = (participant) => {
+        const s = participant?.attributes?.["lk.agent.state"];
+        if (s) setAgentState(s);
+      };
+      room.on(RoomEvent.ParticipantConnected, (p) => {
+        if (p.identity?.startsWith("agent-")) applyAgentAttrs(p);
+      });
+      room.on(RoomEvent.ParticipantAttributesChanged, (changed, participant) => {
+        if (participant?.identity?.startsWith("agent-")) applyAgentAttrs(participant);
+      });
+
       room.on(RoomEvent.Disconnected, (reason) => {
         status.textContent = "Disconnected" + (reason ? ": " + reason : "");
         talk.classList.remove("active");
         talk.textContent = "Talk to Sartre";
+        setAgentState(null);
       });
       room.on(RoomEvent.ConnectionStateChanged, (s) => {
         if (s === ConnectionState.Connected) {
@@ -204,6 +277,7 @@
       mute.classList.remove("visible", "muted");
       mute.textContent = "🎤";
       mute.disabled = true;
+      setAgentState(null);
       status.textContent = "Ready.";
     }
 
