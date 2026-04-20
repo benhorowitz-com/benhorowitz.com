@@ -57,6 +57,15 @@
     button.talk:active { transform: scale(0.97); }
     button.talk.active { background: #d93a3a; box-shadow: 0 10px 40px rgba(217, 58, 58, 0.4); }
     button.talk:disabled { opacity: 0.5; }
+    button.mute {
+      display: none;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #1a1a22; color: #f2f2f2; border: 0;
+      font-size: 28px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button.mute.visible { display: inline-flex; align-items: center; justify-content: center; }
+    button.mute.muted { background: #d93a3a; }
     .status {
       color: #8891a5; font-size: 15px; min-height: 20px;
     }
@@ -86,6 +95,7 @@
   <main>
     <button id="talk" class="talk">Talk to Sartre</button>
     <div class="level-meter"><div id="level"></div></div>
+    <button id="mute" class="mute" aria-label="Mute microphone">🎤</button>
     <div id="status" class="status">Ready.</div>
   </main>
 
@@ -97,6 +107,7 @@
 
     const who = document.getElementById("who");
     const talk = document.getElementById("talk");
+    const mute = document.getElementById("mute");
     const status = document.getElementById("status");
     const level = document.getElementById("level");
 
@@ -175,6 +186,9 @@
       setupMeter(localTrack);
       talk.classList.add("active");
       talk.textContent = "Tap to hang up";
+      mute.classList.add("visible");
+      mute.classList.remove("muted");
+      mute.textContent = "🎤";
     }
 
     async function disconnect() {
@@ -183,8 +197,18 @@
       level.style.width = "0%";
       talk.classList.remove("active");
       talk.textContent = "Talk to Sartre";
+      mute.classList.remove("visible", "muted");
       status.textContent = "Ready.";
     }
+
+    mute.addEventListener("click", async () => {
+      if (!localTrack) return;
+      const nowMuted = !localTrack.isMuted;
+      await (nowMuted ? localTrack.mute() : localTrack.unmute());
+      mute.classList.toggle("muted", nowMuted);
+      mute.textContent = nowMuted ? "🔇" : "🎤";
+      mute.setAttribute("aria-label", nowMuted ? "Unmute microphone" : "Mute microphone");
+    });
 
     function setupMeter(track) {
       const stream = new MediaStream([track.mediaStreamTrack]);
