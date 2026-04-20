@@ -58,14 +58,17 @@
     button.talk.active { background: #d93a3a; box-shadow: 0 10px 40px rgba(217, 58, 58, 0.4); }
     button.talk:disabled { opacity: 0.5; }
     button.mute {
-      display: none;
       width: 72px; height: 72px; border-radius: 50%;
       background: #1a1a22; color: #f2f2f2; border: 0;
       font-size: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
       -webkit-tap-highlight-color: transparent;
+      opacity: 0.35;
+      transition: opacity .15s ease;
     }
-    button.mute.visible { display: inline-flex; align-items: center; justify-content: center; }
-    button.mute.muted { background: #d93a3a; }
+    button.mute.visible { opacity: 1; }
+    button.mute.muted { background: #d93a3a; opacity: 1; }
+    button.mute:disabled { cursor: default; }
     .status {
       color: #8891a5; font-size: 15px; min-height: 20px;
     }
@@ -95,7 +98,7 @@
   <main>
     <button id="talk" class="talk">Talk to Sartre</button>
     <div class="level-meter"><div id="level"></div></div>
-    <button id="mute" class="mute" aria-label="Mute microphone">🎤</button>
+    <button id="mute" class="mute" aria-label="Mute microphone" disabled>🎤</button>
     <div id="status" class="status">Ready.</div>
   </main>
 
@@ -189,6 +192,7 @@
       mute.classList.add("visible");
       mute.classList.remove("muted");
       mute.textContent = "🎤";
+      mute.disabled = false;
     }
 
     async function disconnect() {
@@ -198,6 +202,8 @@
       talk.classList.remove("active");
       talk.textContent = "Talk to Sartre";
       mute.classList.remove("visible", "muted");
+      mute.textContent = "🎤";
+      mute.disabled = true;
       status.textContent = "Ready.";
     }
 
