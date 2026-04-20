@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Sartre" />
-  <meta name="theme-color" content="#111111" />
+  <meta name="theme-color" content="#0b0b10" />
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <meta name="googlebot" content="noindex, nofollow, noarchive" />
   <title>Sartre</title>
@@ -24,35 +24,51 @@
       min-height: 100%;
     }
     header {
-      padding: 20px 24px 16px;
-      display: flex; flex-direction: column; gap: 12px;
+      padding: 24px 24px 12px;
+      display: flex; flex-direction: column; gap: 14px;
       align-items: center;
     }
     h1 {
-      margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;
+      margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em;
     }
     .who {
       display: flex; align-items: center; gap: 10px;
-      background: #1a1a22; border-radius: 12px;
-      padding: 10px 14px;
+      background: #1a1a22; border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 17px;
     }
-    .who label { font-size: 14px; color: #a0a0b0; }
+    .who label { color: #8891a5; }
     .who select {
-      background: transparent; color: #f2f2f2; border: 0; font-size: 18px; font-weight: 500;
-      -webkit-appearance: none; appearance: none; padding-right: 20px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0' fill='%23a0a0b0'/></svg>");
+      background: transparent; color: #f2f2f2; border: 0;
+      font-size: 20px; font-weight: 600;
+      -webkit-appearance: none; appearance: none; padding-right: 22px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0' fill='%238891a5'/></svg>");
       background-repeat: no-repeat; background-position: right 2px center;
     }
     main {
       flex: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 0 24px 120px;
-      text-align: center; color: #888; line-height: 1.6;
+      padding: 0 28px 160px;
+      text-align: center;
     }
-    main p { max-width: 420px; font-size: 15px; }
-    main .arrow { margin-top: 20px; color: #555; font-size: 48px; }
-    /* The widget element renders as a fixed-position floating button.
-       Keeping its defaults. */
+    .callout {
+      color: #c0c4d0; font-size: 18px; line-height: 1.5;
+      max-width: 360px; margin: 0 0 16px;
+    }
+    .callout strong { color: #f2f2f2; font-weight: 600; }
+    .arrow {
+      margin-top: 12px; color: #5a5e6e; font-size: 64px;
+      display: inline-block;
+      animation: bob 1.6s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translate(0, 0); }
+      50%      { transform: translate(10px, 10px); }
+    }
+    .whisper {
+      color: #6a6e7c; font-size: 13px; margin-top: 24px;
+    }
   </style>
 </head>
 <body>
@@ -71,21 +87,18 @@
   </header>
 
   <main>
-    <p>Pick who you are above, then tap the circle in the bottom-right to start talking with Sartre.</p>
-    <p>Tap again when you're done.</p>
+    <p class="callout">Tap the <strong>Talk to Sartre</strong> button in the corner to start a conversation.</p>
     <div class="arrow">↘︎</div>
+    <p class="whisper">Tap it again when you're done.</p>
   </main>
 
-  <!-- ConvAI widget: floats bottom-right by default (placement per agent's widget_config). -->
   <elevenlabs-convai id="sartre-widget" agent-id="agent_8401kpkzcc64efrrahvrq0qtk7w8"></elevenlabs-convai>
-
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
   <script>
     const who = document.getElementById("who");
     const widget = document.getElementById("sartre-widget");
 
-    // Restore saved choice
     const saved = localStorage.getItem("sartre.user");
     if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
 
