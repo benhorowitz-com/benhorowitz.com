@@ -102,14 +102,28 @@
     const saved = localStorage.getItem("sartre.user");
     if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
 
+    const WARMUP_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/warmup";
+
     function applyUser(userId) {
       widget.setAttribute("dynamic-variables", JSON.stringify({ user_id: userId }));
     }
+
+    function warmup(userId) {
+      fetch(WARMUP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: userId }),
+        keepalive: true,
+      }).catch(() => {});
+    }
+
     applyUser(who.value);
+    warmup(who.value);
 
     who.addEventListener("change", () => {
       localStorage.setItem("sartre.user", who.value);
       applyUser(who.value);
+      warmup(who.value);
     });
   </script>
 </body>
