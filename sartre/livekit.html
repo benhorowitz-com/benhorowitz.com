@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Sartre" />
+  <meta name="theme-color" content="#0b0b10" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Sartre</title>
+  <style>
+    :root { color-scheme: dark; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #0b0b10; color: #f2f2f2;
+      overscroll-behavior: none;
+    }
+    body {
+      display: flex; flex-direction: column;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      min-height: 100%;
+    }
+    header {
+      padding: 24px 24px 12px;
+      display: flex; flex-direction: column; gap: 14px;
+      align-items: center;
+    }
+    h1 { margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+    .who {
+      display: flex; align-items: center; gap: 10px;
+      background: #1a1a22; border-radius: 14px;
+      padding: 14px 18px; font-size: 17px;
+    }
+    .who label { color: #8891a5; }
+    .who select {
+      background: transparent; color: #f2f2f2; border: 0;
+      font-size: 20px; font-weight: 600;
+      -webkit-appearance: none; appearance: none; padding-right: 22px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0' fill='%238891a5'/></svg>");
+      background-repeat: no-repeat; background-position: right 2px center;
+    }
+    main {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 28px 40px; text-align: center; gap: 20px;
+    }
+    button.talk {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: #1f6feb; color: white; border: 0;
+      font-size: 22px; font-weight: 600;
+      box-shadow: 0 10px 40px rgba(31, 111, 235, 0.4);
+      transition: transform .1s ease, background .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button.talk:active { transform: scale(0.97); }
+    button.talk.active { background: #d93a3a; box-shadow: 0 10px 40px rgba(217, 58, 58, 0.4); }
+    button.talk:disabled { opacity: 0.5; }
+    .status {
+      color: #8891a5; font-size: 15px; min-height: 20px;
+    }
+    .level-meter {
+      width: 220px; height: 4px; background: #1a1a22; border-radius: 2px; overflow: hidden;
+    }
+    .level-meter > div {
+      height: 100%; background: #1f6feb; width: 0%; transition: width .08s linear;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sartre</h1>
+    <div class="who">
+      <label for="who">I'm</label>
+      <select id="who" autocomplete="off">
+        <option value="sofia">Sofia</option>
+        <option value="alex">Alex</option>
+        <option value="sarah">Sarah</option>
+        <option value="ben" selected>Ben</option>
+        <option value="yulia">Yulia</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <button id="talk" class="talk">Talk to Sartre</button>
+    <div class="level-meter"><div id="level"></div></div>
+    <div id="status" class="status">Ready.</div>
+  </main>
+
+  <script type="module">
+    import { Room, RoomEvent, createLocalAudioTrack, ConnectionState }
+      from "https://cdn.skypack.dev/livekit-client@2.13.0";
+
+    const TOKEN_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/livekit-token";
+
+    const who = document.getElementById("who");
+    const talk = document.getElementById("talk");
+    const status = document.getElementById("status");
+    const level = document.getElementById("level");
+
+    const saved = localStorage.getItem("sartre.user");
+    if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
+    who.addEventListener("change", () => localStorage.setItem("sartre.user", who.value));
+
+    let room = null;
+    let localTrack = null;
+
+    async function connect() {
+      status.textContent = "Minting token…";
+      const tokenResp = await fetch(TOKEN_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: who.value }),
+      });
+      if (!tokenResp.ok) {
+        status.textContent = "Token error: " + tokenResp.status;
+        return;
+      }
+      const { url, token } = await tokenResp.json();
+
+      status.textContent = "Connecting…";
+      room = new Room({ adaptiveStream: true, dynacast: true });
+
+      room.on(RoomEvent.TrackSubscribed, (track) => {
+        if (track.kind === "audio") {
+          const el = track.attach();
+          el.autoplay = true;
+          document.body.appendChild(el);
+        }
+      });
+      room.on(RoomEvent.Disconnected, (reason) => {
+        status.textContent = "Disconnected" + (reason ? ": " + reason : "");
+        talk.classList.remove("active");
+        talk.textContent = "Talk to Sartre";
+      });
+      room.on(RoomEvent.ConnectionStateChanged, (s) => {
+        if (s === ConnectionState.Connected) {
+          status.textContent = "Connected — start talking.";
+        }
+      });
+
+      await room.connect(url, token);
+
+      localTrack = await createLocalAudioTrack({
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      });
+      await room.localParticipant.publishTrack(localTrack);
+
+      setupMeter(localTrack);
+      talk.classList.add("active");
+      talk.textContent = "Tap to hang up";
+    }
+
+    async function disconnect() {
+      if (localTrack) { localTrack.stop(); localTrack = null; }
+      if (room) { await room.disconnect(); room = null; }
+      level.style.width = "0%";
+      talk.classList.remove("active");
+      talk.textContent = "Talk to Sartre";
+      status.textContent = "Ready.";
+    }
+
+    function setupMeter(track) {
+      const stream = new MediaStream([track.mediaStreamTrack]);
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 512;
+      src.connect(analyser);
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      function tick() {
+        if (!localTrack) return;
+        analyser.getByteTimeDomainData(data);
+        let peak = 0;
+        for (const v of data) { const d = Math.abs(v - 128); if (d > peak) peak = d; }
+        level.style.width = Math.min(100, (peak / 64) * 100) + "%";
+        requestAnimationFrame(tick);
+      }
+      tick();
+    }
+
+    talk.addEventListener("click", async () => {
+      talk.disabled = true;
+      try {
+        if (room) await disconnect();
+        else await connect();
+      } catch (e) {
+        status.textContent = "Error: " + e.message;
+        console.error(e);
+      } finally {
+        talk.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
