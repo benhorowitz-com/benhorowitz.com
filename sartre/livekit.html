@@ -121,13 +121,33 @@
       const { url, token } = await tokenResp.json();
 
       status.textContent = "Connecting…";
-      room = new Room({ adaptiveStream: true, dynacast: true });
+      // adaptiveStream can pause playback on hidden tabs; dynacast can
+      // unsubscribe the agent's track mid-conversation. Both bad for voice on
+      // iPad — keep it simple and always subscribed.
+      room = new Room({ adaptiveStream: false, dynacast: false });
 
-      room.on(RoomEvent.TrackSubscribed, (track) => {
-        if (track.kind === "audio") {
-          const el = track.attach();
-          el.autoplay = true;
-          document.body.appendChild(el);
+      const audioEls = [];
+      room.on(RoomEvent.TrackSubscribed, async (track, pub, participant) => {
+        if (track.kind !== "audio") return;
+        status.textContent = `Agent audio: ${participant.identity}`;
+        const el = track.attach();
+        el.autoplay = true;
+        el.setAttribute("playsinline", "true");
+        el.style.display = "none";
+        document.body.appendChild(el);
+        audioEls.push(el);
+        // iOS Safari blocks autoplay on tracks that arrive after the initial
+        // user-gesture-granted playback if the element was added lazily. Force
+        // play() explicitly and retry on audio-unlock events.
+        try { await el.play(); } catch (e) { console.warn("play() failed", e); }
+      });
+      room.on(RoomEvent.TrackUnsubscribed, (track) => {
+        track.detach().forEach(el => el.remove());
+      });
+      room.on(RoomEvent.AudioPlaybackStatusChanged, () => {
+        if (!room.canPlaybackAudio) {
+          status.textContent = "Tap the circle to enable audio.";
+          // Tapping the button again will trigger room.startAudio()
         }
       });
       room.on(RoomEvent.Disconnected, (reason) => {
@@ -142,6 +162,8 @@
       });
 
       await room.connect(url, token);
+      // Explicitly unlock audio playback under the current user gesture.
+      try { await room.startAudio(); } catch (e) { console.warn("startAudio", e); }
 
       localTrack = await createLocalAudioTrack({
         echoCancellation: true,
