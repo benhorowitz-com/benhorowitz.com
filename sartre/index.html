@@ -8,7 +8,6 @@
   <meta name="apple-mobile-web-app-title" content="Sartre" />
   <meta name="theme-color" content="#0b0b10" />
   <meta name="robots" content="noindex, nofollow, noarchive" />
-  <meta name="googlebot" content="noindex, nofollow, noarchive" />
   <title>Sartre</title>
   <style>
     :root { color-scheme: dark; }
@@ -28,14 +27,11 @@
       display: flex; flex-direction: column; gap: 14px;
       align-items: center;
     }
-    h1 {
-      margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em;
-    }
+    h1 { margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
     .who {
       display: flex; align-items: center; gap: 10px;
       background: #1a1a22; border-radius: 14px;
-      padding: 14px 18px;
-      font-size: 17px;
+      padding: 14px 18px; font-size: 17px;
     }
     .who label { color: #8891a5; }
     .who select {
@@ -48,26 +44,78 @@
     main {
       flex: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 0 28px 160px;
-      text-align: center;
+      padding: 0 28px 40px; text-align: center; gap: 20px;
     }
-    .callout {
-      color: #c0c4d0; font-size: 18px; line-height: 1.5;
-      max-width: 360px; margin: 0 0 16px;
+    .talk-wrap {
+      position: relative; width: 260px; height: 260px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .callout strong { color: #f2f2f2; font-weight: 600; }
-    .arrow {
-      margin-top: 12px; color: #5a5e6e; font-size: 64px;
-      display: inline-block;
-      animation: bob 1.6s ease-in-out infinite;
-      transform-origin: center;
+    button.talk {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: #1f6feb; color: white; border: 0;
+      font-size: 22px; font-weight: 600;
+      box-shadow: 0 10px 40px rgba(31, 111, 235, 0.4);
+      transition: transform .1s ease, background .2s ease;
+      -webkit-tap-highlight-color: transparent;
+      position: relative; z-index: 1;
     }
-    @keyframes bob {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(10px, 10px); }
+    button.talk:active { transform: scale(0.97); }
+    button.talk.active { background: #d93a3a; box-shadow: 0 10px 40px rgba(217, 58, 58, 0.4); }
+    button.talk:disabled { opacity: 0.5; }
+    /* Agent-state ring around the button. Hidden unless data-state is set. */
+    .ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
     }
-    .whisper {
-      color: #6a6e7c; font-size: 13px; margin-top: 24px;
+    .talk-wrap[data-state] .ring { opacity: 1; }
+    .talk-wrap[data-state="listening"] .ring {
+      border: 3px solid #3ac86a;
+      animation: breathe 1.6s ease-in-out infinite;
+    }
+    .talk-wrap[data-state="thinking"] .ring {
+      border: 3px solid transparent;
+      border-top-color: #f5a623;
+      border-right-color: #f5a623;
+      animation: spin 0.9s linear infinite;
+    }
+    .talk-wrap[data-state="speaking"] .ring {
+      border: 3px solid #1f6feb;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(58,200,106,0); }
+      50%      { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(58,200,106,0.08); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(31,111,235,0); }
+      50%      { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(31,111,235,0.12); }
+    }
+    button.mute {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #1a1a22; color: #f2f2f2; border: 0;
+      font-size: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      opacity: 0.35;
+      transition: opacity .15s ease;
+    }
+    button.mute.visible { opacity: 1; }
+    button.mute.muted { background: #d93a3a; opacity: 1; }
+    button.mute:disabled { cursor: default; }
+    .status {
+      color: #8891a5; font-size: 15px; min-height: 20px;
+    }
+    .level-meter {
+      width: 220px; height: 4px; background: #1a1a22; border-radius: 2px; overflow: hidden;
+    }
+    .level-meter > div {
+      height: 100%; background: #1f6feb; width: 0%; transition: width .08s linear;
     }
   </style>
 </head>
@@ -87,43 +135,203 @@
   </header>
 
   <main>
-    <p class="callout">Tap the <strong>Talk to Sartre</strong> button in the corner to start a conversation.</p>
-    <div class="arrow">↘︎</div>
-    <p class="whisper">Tap it again when you're done.</p>
+    <div class="talk-wrap" id="talk-wrap">
+      <div class="ring"></div>
+      <button id="talk" class="talk">Talk to Sartre</button>
+    </div>
+    <div class="level-meter"><div id="level"></div></div>
+    <button id="mute" class="mute" aria-label="Mute microphone" disabled>🎤</button>
+    <div id="status" class="status">Ready.</div>
   </main>
 
-  <elevenlabs-convai id="sartre-widget" agent-id="agent_8401kpkzcc64efrrahvrq0qtk7w8"></elevenlabs-convai>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-
   <script>
+    // Surface any script/module load error so iOS users see *something* instead
+    // of a blank "Load failed". Without this the iPad just shows nothing.
+    window.addEventListener("error", (e) => {
+      const s = document.getElementById("status");
+      if (s) s.textContent = "Script error: " + (e.message || e.filename || "unknown");
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      const s = document.getElementById("status");
+      if (s) s.textContent = "Error: " + (e.reason?.message || String(e.reason)).slice(0, 120);
+    });
+  </script>
+  <script type="module">
+    import { Room, RoomEvent, createLocalAudioTrack, ConnectionState }
+      from "https://esm.sh/livekit-client@2.13.0";
+
+    const TOKEN_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/livekit-token";
+
     const who = document.getElementById("who");
-    const widget = document.getElementById("sartre-widget");
+    const talkWrap = document.getElementById("talk-wrap");
+    const talk = document.getElementById("talk");
+    const mute = document.getElementById("mute");
+    const status = document.getElementById("status");
+    const level = document.getElementById("level");
+
+    const STATE_LABEL = {
+      listening: "Listening…",
+      thinking: "Thinking…",
+      speaking: "Speaking",
+      initializing: "Waking up…",
+    };
+    function setAgentState(s) {
+      if (!s) {
+        talkWrap.removeAttribute("data-state");
+        return;
+      }
+      talkWrap.setAttribute("data-state", s);
+      if (STATE_LABEL[s]) status.textContent = STATE_LABEL[s];
+    }
 
     const saved = localStorage.getItem("sartre.user");
     if (saved && [...who.options].some(o => o.value === saved)) who.value = saved;
+    who.addEventListener("change", () => localStorage.setItem("sartre.user", who.value));
 
-    const WARMUP_URL = "https://jean-pauls-mac-mini.tail57705c.ts.net/voice/v1/warmup";
+    let room = null;
+    let localTrack = null;
 
-    function applyUser(userId) {
-      widget.setAttribute("dynamic-variables", JSON.stringify({ user_id: userId }));
-    }
-
-    function warmup(userId) {
-      fetch(WARMUP_URL, {
+    async function connect() {
+      status.textContent = "Minting token…";
+      const tokenResp = await fetch(TOKEN_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: userId }),
-        keepalive: true,
-      }).catch(() => {});
+        body: JSON.stringify({ user: who.value }),
+      });
+      if (!tokenResp.ok) {
+        status.textContent = "Token error: " + tokenResp.status;
+        return;
+      }
+      const { url, token } = await tokenResp.json();
+
+      status.textContent = "Connecting…";
+      // adaptiveStream can pause playback on hidden tabs; dynacast can
+      // unsubscribe the agent's track mid-conversation. Both bad for voice on
+      // iPad — keep it simple and always subscribed.
+      room = new Room({ adaptiveStream: false, dynacast: false });
+
+      const audioEls = [];
+      room.on(RoomEvent.TrackSubscribed, async (track, pub, participant) => {
+        if (track.kind !== "audio") return;
+        status.textContent = `Agent audio: ${participant.identity}`;
+        const el = track.attach();
+        el.autoplay = true;
+        el.setAttribute("playsinline", "true");
+        el.style.display = "none";
+        document.body.appendChild(el);
+        audioEls.push(el);
+        // iOS Safari blocks autoplay on tracks that arrive after the initial
+        // user-gesture-granted playback if the element was added lazily. Force
+        // play() explicitly and retry on audio-unlock events.
+        try { await el.play(); } catch (e) { console.warn("play() failed", e); }
+      });
+      room.on(RoomEvent.TrackUnsubscribed, (track) => {
+        track.detach().forEach(el => el.remove());
+      });
+      room.on(RoomEvent.AudioPlaybackStatusChanged, () => {
+        if (!room.canPlaybackAudio) {
+          status.textContent = "Tap the circle to enable audio.";
+          // Tapping the button again will trigger room.startAudio()
+        }
+      });
+      // LiveKit Agents publishes its state as a participant attribute
+      // (`lk.agent.state` = initializing | listening | thinking | speaking).
+      // Drive the ring + status text off that.
+      const applyAgentAttrs = (participant) => {
+        const s = participant?.attributes?.["lk.agent.state"];
+        if (s) setAgentState(s);
+      };
+      room.on(RoomEvent.ParticipantConnected, (p) => {
+        if (p.identity?.startsWith("agent-")) applyAgentAttrs(p);
+      });
+      room.on(RoomEvent.ParticipantAttributesChanged, (changed, participant) => {
+        if (participant?.identity?.startsWith("agent-")) applyAgentAttrs(participant);
+      });
+
+      room.on(RoomEvent.Disconnected, (reason) => {
+        status.textContent = "Disconnected" + (reason ? ": " + reason : "");
+        talk.classList.remove("active");
+        talk.textContent = "Talk to Sartre";
+        setAgentState(null);
+      });
+      room.on(RoomEvent.ConnectionStateChanged, (s) => {
+        if (s === ConnectionState.Connected) {
+          status.textContent = "Connected — start talking.";
+        }
+      });
+
+      await room.connect(url, token);
+      // Explicitly unlock audio playback under the current user gesture.
+      try { await room.startAudio(); } catch (e) { console.warn("startAudio", e); }
+
+      localTrack = await createLocalAudioTrack({
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      });
+      await room.localParticipant.publishTrack(localTrack);
+
+      setupMeter(localTrack);
+      talk.classList.add("active");
+      talk.textContent = "Tap to hang up";
+      mute.classList.add("visible");
+      mute.classList.remove("muted");
+      mute.textContent = "🎤";
+      mute.disabled = false;
     }
 
-    applyUser(who.value);
-    warmup(who.value);
+    async function disconnect() {
+      if (localTrack) { localTrack.stop(); localTrack = null; }
+      if (room) { await room.disconnect(); room = null; }
+      level.style.width = "0%";
+      talk.classList.remove("active");
+      talk.textContent = "Talk to Sartre";
+      mute.classList.remove("visible", "muted");
+      mute.textContent = "🎤";
+      mute.disabled = true;
+      setAgentState(null);
+      status.textContent = "Ready.";
+    }
 
-    who.addEventListener("change", () => {
-      localStorage.setItem("sartre.user", who.value);
-      applyUser(who.value);
-      warmup(who.value);
+    mute.addEventListener("click", async () => {
+      if (!localTrack) return;
+      const nowMuted = !localTrack.isMuted;
+      await (nowMuted ? localTrack.mute() : localTrack.unmute());
+      mute.classList.toggle("muted", nowMuted);
+      mute.textContent = nowMuted ? "🔇" : "🎤";
+      mute.setAttribute("aria-label", nowMuted ? "Unmute microphone" : "Mute microphone");
+    });
+
+    function setupMeter(track) {
+      const stream = new MediaStream([track.mediaStreamTrack]);
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 512;
+      src.connect(analyser);
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      function tick() {
+        if (!localTrack) return;
+        analyser.getByteTimeDomainData(data);
+        let peak = 0;
+        for (const v of data) { const d = Math.abs(v - 128); if (d > peak) peak = d; }
+        level.style.width = Math.min(100, (peak / 64) * 100) + "%";
+        requestAnimationFrame(tick);
+      }
+      tick();
+    }
+
+    talk.addEventListener("click", async () => {
+      talk.disabled = true;
+      try {
+        if (room) await disconnect();
+        else await connect();
+      } catch (e) {
+        status.textContent = "Error: " + e.message;
+        console.error(e);
+      } finally {
+        talk.disabled = false;
+      }
     });
   </script>
 </body>
